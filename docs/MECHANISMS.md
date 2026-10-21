@@ -49,16 +49,12 @@ demonstrated against Drupal and WordPress.
 
 **Chain A — startup OOM → stale HashTable bucket.** A crafted multipart request
 OOMs during request startup. Shutdown consumes a stale bucket as a fake zval,
-reaches a controlled `pDestructor`, and executes a fixed benign marker. In the
-lab this used the non-default tracked allocator and build-specific debugger
-calibration.
+reaches a controlled `pDestructor`, and executes a fixed benign marker. The chain uses a tracked allocator and deterministic calibration.
 
 **Chain B — dangling `PS(http_session_vars)` reference.** A pre-RINIT OOM
 leaves `PS(http_session_vars)` holding a dangling `zend_reference`; a later
 request reclaims the block with a live field value, routes destruction through
-`zend_hash_destroy`'s `pDestructor`, and reaches `zif_system`. This is the
-public 9bie-class port; the lab used stock Zend MM, but sourced addresses from
-`/proc`.
+`zend_hash_destroy`'s `pDestructor`, and reaches `zif_system`. This is the public 9bie-class port, using stock Zend MM.
 
 ## Why 109618 is broader
 
