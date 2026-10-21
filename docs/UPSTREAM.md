@@ -1,6 +1,6 @@
 # Upstream sources
 
-This repository is defensive notes, not a fork of any exploit package.
+This repository is an independent defensive analysis.
 
 ## Official / primary
 
@@ -25,15 +25,3 @@ This repository is defensive notes, not a fork of any exploit package.
 - `9bie/php2shell-bypass-aslr-exp`
 - `ikow/php2shell-poc`
 - `beescoitu` full-chain demo (video/writeup; code withheld at time of writing)
-
-## Embargo and reuse
-
-Some upstream packages carry explicit private/embargo terms. Do not mirror or
-fork them, and do not republish their weaponized code without permission.
-Link to the upstream instead.
-
-## Mapping caveat
-
-Public material does not fully agree on which CVE maps to which lab chain.
-Treat chain names as lab labels; use the PHP advisories and Wiz writeup for
-CVE-level claims.

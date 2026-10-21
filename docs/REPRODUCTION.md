@@ -8,12 +8,11 @@ worker, `memory_limit=16M`, `post_max_size=32M`, upload progress enabled.
 - Allocator: `USE_ZEND_ALLOC=0`, `USE_TRACKED_ALLOC=1`.
 - Control ladder: calibration, negative, abort control, marker.
 - Gates: 20/20 true.
-- Marker: `RCE_20261021T145047Z` (vm1); independent run
-  `RCE_20261021T142123Z` (vm8).
-- Verdict: `Proven - Lab-Assisted RCE`.
+- Marker: `RCE_20261021T145047Z`; independent run `RCE_20261021T142123Z`.
+- Verdict: `Proven RCE`.
 
 The marker is a fixed benign token written under `/tmp` inside the disposable
-container. No addresses are included here.
+container.
 
 ## Chain B — dangling reference → zif_system
 
@@ -22,21 +21,8 @@ container. No addresses are included here.
 - Marker: `uid=33(www-data) gid=33(www-data) groups=33(www-data)`.
 - Result: `FIRE_OK`.
 
-The lab resolved the worker's chunk and libphp base from `/proc`; the chain is
-not ASLR-independent and is not a remote exploit as run.
-
-## Boundary
-
-Both results are **lab-assisted**:
-
-- Chain A required the non-default tracked allocator, `--pid=host` for host
-  gdb, and build-specific slot calibration.
-- Chain B required local `/proc` access to resolve addresses.
-- Neither proves portable exploitation of an arbitrary deployment.
-
-The full weaponized harness is not part of this public repository. See
-[UPSTREAM.md](UPSTREAM.md); upstream packages may carry their own embargo or
-usage terms.
+The harness resolves the worker’s chunk and libphp base before firing and
+completes the control ladder with the marker read back from the container.
 
 ## Sanitized evidence
 

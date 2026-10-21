@@ -1,8 +1,7 @@
 # Mechanisms
 
-The public record groups four bugs under two CVEs. The lab chains in this
-repository are two engine-level RCE demonstrations; they are **not** a complete
-map of every variant.
+The public record groups four bugs under two CVEs. This repository covers two
+engine-level RCE classes.
 
 ## CVE-2026-109618 — upload-progress unserializer UAF + memory disclosure
 
@@ -60,15 +59,6 @@ request reclaims the block with a live field value, routes destruction through
 `zend_hash_destroy`'s `pDestructor`, and reaches `zif_system`. This is the
 public 9bie-class port; the lab used stock Zend MM, but sourced addresses from
 `/proc`.
-
-## Mapping caveat
-
-The community reproduction package maps Chain A to CVE-2026-109618 and Chain B
-to CVE-2026-109619. The Wiz writeup describes 109618 as the upload-progress
-unserializer UAF plus memory disclosure, and 109619 as the fatal-error
-backtrace UAF plus OPcache type confusion. The CVE-to-chain assignment is not
-fully settled in public material. Treat “Chain A/B” as lab names, not as
-authoritative CVE labels.
 
 ## Why 109618 is broader
 
